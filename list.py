@@ -1,4 +1,4 @@
-import ctypes
+import ctypes #foreign function library used in Python, provides C compatible data types
 class myList:
     def __init__(self):
         self.size =1
@@ -6,8 +6,10 @@ class myList:
         self.A = self.createArr(self.size)
     
     def createArr(self, capacity):
+        #creates a C type array with size = capacity
         return (capacity*ctypes.py_object)()
 
+    # __len__ magic mathod for length of list
     def __len__(self):
         return self.n
     
@@ -34,6 +36,7 @@ class myList:
             res = res + str(self.A[i]) + ','
         return '[' + res[:-1] + ']'
 
+    #__getitem__ is a magic method for A[0] : index access
     def __getitem__(self, index):
         if 0<= index and index<= self.n:
             return self.A[index]
@@ -65,6 +68,7 @@ class myList:
             self.resize()
             self.insert(index, ip)
 
+    #__delitem__ magic method for del L[0] : deleting a element at the given index
     def __delitem__(self, pos):
         if pos >=0 and pos <self.n:
             for i in range(pos, self.n-1):
@@ -72,7 +76,8 @@ class myList:
             self.n = self.n - 1
         else:
             return "Index Error"
-    
+
+    #remove delete the item given as the input
     def remove(self, item):
         pos = self.search(item)
         #if not in list then it will return a string
@@ -82,10 +87,6 @@ class myList:
             return pos
 
     
-
-    
-    
-
 
 L = myList()
 L.append(9)
